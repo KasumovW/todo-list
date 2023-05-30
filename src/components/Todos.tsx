@@ -14,7 +14,7 @@ const Todos = observer(() => {
         category: null,
     });
 
-    const onSubmit = (e: any) => {
+    const addTask = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         todos.addTodo({
             id: id,
@@ -27,8 +27,48 @@ const Todos = observer(() => {
                 minute: 'numeric',
             }),
         });
+        modals.addModalOpen();
+        setTask({ title: '', category: null });
+        return false;
+    };
+
+    const editTask = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        todos.editTodo(
+            task.title,
+            new Date().toLocaleTimeString('en-US', {
+                hour12: false,
+                hour: 'numeric',
+                minute: 'numeric',
+            })
+        );
+        setTask({ title: '', category: null });
+        modals.editModalOpen();
 
         return false;
+    };
+
+    const renderTodos = () => {
+        return (
+            <div className='h-[600px] overflow-y-scroll'>
+                {!todos.todos.length && (
+                    <div className='flex flex-col items-center justify-center'>
+                        <h1 className='text-center text-[24px] font-medium mt-[50px] mb-[10px]'>
+                            You don't have any tasks, do you want to add?
+                        </h1>
+                        <button
+                            onClick={() => modals.addModalOpen()}
+                            className='w-[140px] h-[40px] border-solid border border-black/30 block rounded-[10px] hover:bg-black/5'
+                        >
+                            Add task
+                        </button>
+                    </div>
+                )}
+                {todos.todos.map((todo: TodoType) => (
+                    <Todo key={todo.id} {...todo} />
+                ))}
+            </div>
+        );
     };
 
     return (
@@ -37,21 +77,17 @@ const Todos = observer(() => {
                 Today’s tasks
             </h1>
 
-            <div className='h-[600px] overflow-y-scroll'>
-                {todos.todos.map((todo: TodoType) => (
-                    <Todo key={todo.id} {...todo} />
-                ))}
-            </div>
+            {renderTodos()}
 
             {modals.addModal && (
                 <Modal close={() => modals.addModalOpen()}>
-                    <EditTask type='add' state={task} setState={setTask} onSubmit={onSubmit} />
+                    <EditTask type='add' state={task} setState={setTask} onSubmit={addTask} />
                 </Modal>
             )}
 
             {modals.editModal && (
                 <Modal close={() => modals.editModalOpen()}>
-                    <EditTask type='edit' setState={setTask} state={task} onSubmit={onSubmit} />
+                    <EditTask type='edit' setState={setTask} state={task} onSubmit={editTask} />
                 </Modal>
             )}
         </div>

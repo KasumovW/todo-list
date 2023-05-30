@@ -53,7 +53,7 @@ const EditTask = ({ state, setState, onSubmit, type }: Props) => {
                     className='absolute bottom-[10px] left-0 right-0 mx-auto border-solid border border-black/30 w-[150px] h-[40px] rounded-[20px] disabled:cursor-not-allowed disabled:bg-gray-950/5'
                     type='submit'
                 >
-                    Добавить
+                    {type === 'add' ? 'Добавить' : 'Изменить'}
                 </button>
             </form>
         </div>
