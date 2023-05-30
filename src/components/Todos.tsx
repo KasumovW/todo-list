@@ -1,14 +1,15 @@
 import Modal from './Modal';
 import Todo from './Todo';
 import { TodoType } from '../Types';
-import { useId, useState } from 'react';
+import { useState } from 'react';
 import todos from '../store/Todos';
 import modals from '../store/Modals';
 import { observer } from 'mobx-react-lite';
 import EditTask from './EditTask';
 
 const Todos = observer(() => {
-    const id = useId();
+    const id = new Date().toISOString();
+
     const [task, setTask] = useState({
         title: '',
         category: null,

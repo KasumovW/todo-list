@@ -5,13 +5,13 @@ import Cookies from 'js-cookie';
 const todoList = Cookies.get('todos') ? JSON.parse(Cookies.get('todos')!) : null;
 
 class TodoList {
+    editTaskId: null | number = null;
     todos: TodoType[] = todoList || [
         { id: 1, title: 'Make a lot of maney for my family', completed: false, category: 1, time: '09:30' },
         { id: 2, title: 'Hard work', completed: true, category: 2, time: '11:11' },
         { id: 3, title: 'Do training', completed: true, category: 3, time: '12:32' },
         { id: 4, title: 'All things', completed: false, category: 4, time: '16:28' },
     ];
-    editTaskId: null | number = null;
 
     constructor() {
         makeAutoObservable(this);

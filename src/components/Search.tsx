@@ -6,7 +6,12 @@ const Search = () => {
             <span className='text-[22px] flex items-center'>
                 <AiOutlineSearch />
             </span>
-            <input className='w-[75%] h-full ml-[5px] outline-none' placeholder='Search...' type='text' />
+            <input
+                spellCheck
+                className='w-[75%] h-full ml-[5px] outline-none'
+                placeholder='Search...'
+                type='text'
+            />
         </div>
     );
 };

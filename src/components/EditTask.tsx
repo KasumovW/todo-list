@@ -24,6 +24,7 @@ const EditTask = ({ state, setState, onSubmit, type }: Props) => {
                         className='bg-white w-full border-solid border border-black/30 h-[30px] text-[18px] outline-none rounded-l-[5px] pl-[5px]'
                         type='text'
                         placeholder='Задача...'
+                        spellCheck
                     />
                 </label>
                 <label className='w-1/3'>

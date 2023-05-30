@@ -21,7 +21,14 @@ const Todo = ({ id, title, completed, time }: TodoType) => {
                 />
                 <div className='w-[80%] text-black/50'>
                     <p>{time}</p>
-                    <p className={completed ? 'line-through' : ''}>{title}</p>
+                    <p
+                        title={title}
+                        className={`overflow-hidden text-ellipsis w-full whitespace-nowrap ${
+                            completed && 'line-through'
+                        }`}
+                    >
+                        {title}
+                    </p>
                 </div>
                 <div className='flex flex-col gap-[15px]'>
                     <div onClick={changeTask} className='text-[26px] cursor-pointer'>
